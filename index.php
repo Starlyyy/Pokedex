@@ -2,10 +2,12 @@
 
     //include 'logica.php';
 
+    $pok = 5; //variavel criada para facilitar a mudança na quantidade de pokemons
+
     $pokemons_api = file_get_contents('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
     $pokemons = json_decode($pokemons_api, true);
 
-    for($i = 0; $i < 40; $i++){
+    for($i = 0; $i < $pok; $i++){
 
         $pokemon = $pokemons['results'][$i];
 
@@ -105,15 +107,15 @@
 
         <div id="Pokémons">
 
-            <?php for($i = 0; $i < 40; $i++): ?>
+            <?php for($i = 0; $i < $pok; $i++): ?>
 
             <div class="Pokémon">
 
                 <img src="<?= $pokemons['results'][$i]['sprites']['other']['dream_world']['front_default']?>" alt="" width="350px">
                 
                 <h1><?= $pokemons['results'][$i]['name']?></h1>
-                <p>Peso: 23.5 kg</p>
-                <p>Altura: 1.0 m</p>
+                <p><?php echo "Peso: " . ($pokemons['results'][$i]['weight'] / 10) . " kg"?></p>
+                <p><?php echo "Altura: " . ($pokemons['results'][$i]['height'] / 10) . " m"?></p>
 
             </div>
 
